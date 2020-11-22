@@ -1,4 +1,4 @@
-# Projecting the Severity of COVID-19 among US Counties
+# Projecting the Severity of COVID-19 among Counties in the United States
 
 Final project for Special Topics in Data Science (CS 7290), Northeastern University
 
