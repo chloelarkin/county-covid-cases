@@ -2,9 +2,23 @@
 
 ## Abstract
 
-One Paragraph of project description goes here
+In this project, we investigate causal relationships affecting the outcome of county-level COVID-19 case rate, normalized by county population. 
+
+In search of causal relationships affecting the outcome of COVID-19 case rates in a county, we explore the following variables:
+* Citizen political leaning
+* State political leaning
+* Emergency preparedness, operationalized as ICU bed availability per capita
+* Proportion of population with a high school education
+* CDC guideline adherence among the county population
+* State bans on large gatherings
+* Median household income
+* Urban economic index: An index created by the USDA that captures a relationship between population density and regional revenue
 
 ## Methods
+We started with the hypothesized DAG pictured in the top of our Causal Modeling notebook.
+
+We binned our variables to reduce the dimensionality of the DAG:
+
 
 ## How to explore this project
 
@@ -55,7 +69,7 @@ Rgraphviz
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/chloelarkin/county-covid-cases/blob/main/LICENSE.md) file for details
 
 ## Acknowledgments
 
