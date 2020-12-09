@@ -4,7 +4,7 @@
 
 In this project, we investigate causal relationships affecting the outcome of **county-level COVID-19 incidence rate**, normalized by county population. 
 
-In search of causal relationships affecting the outcome of COVID-19 incidence rate in a county, we explore the following variables:
+In search of causal relationships affecting the outcome of COVID-19 incidence rate in a county, we construct a causal directed acyclic graph (DAG) from the following variables:
 * **Citizen political leaning** (Node values: Heavily Republican, Republican, Leaning Republican, Even, Leaning Democrat, Democrat, Heavily Democrat)
 * **State political leaning** (Node values: Democrat, Republican)
 * **Emergency preparedness**, operationalized as ICU bed availability per capita (Node values: Low, Medium, High, Very High availability)
