@@ -2,23 +2,32 @@
 
 ## Abstract
 
-In this project, we investigate causal relationships affecting the outcome of county-level COVID-19 case rate, normalized by county population. 
+In this project, we investigate causal relationships affecting the outcome of **county-level COVID-19 incidence rate**, normalized by county population. 
 
-In search of causal relationships affecting the outcome of COVID-19 case rates in a county, we explore the following variables:
-* Citizen political leaning
-* State political leaning
-* Emergency preparedness, operationalized as ICU bed availability per capita
-* Proportion of population with a high school education
-* CDC guideline adherence among the county population
-* State bans on large gatherings
-* Median household income
-* Urban economic index: An index created by the USDA that captures a relationship between population density and regional revenue
 
-## Methods
-We started with the hypothesized DAG pictured in the top of our Causal Modeling notebook.
+## Deliverables
 
-We binned our variables to reduce the dimensionality of the DAG:
+### 1. Hypothesize a DAG modeling county COVID-19 incidence rate outcomes
+In search of causal relationships affecting the outcome of COVID-19 incidence rate in a county, we construct a causal directed acyclic graph (DAG) from the following binned variables:
+* **Citizen political leaning** (Node values: Heavily Republican, Republican, Leaning Republican, Even, Leaning Democrat, Democrat, Heavily Democrat)
+* **State political leaning** (Node values: Democrat, Republican)
+* **Emergency preparedness**, operationalized as ICU bed availability per capita (Node values: Low, Medium, High, Very High availability)
+* **Proportion of population with no high school education** (Node values: Very Low, Low, Medium, High, Very High)
+* **CDC guideline adherence** among the county population (Node values: Low, Medium, High)
+* **State bans on large gatherings** (Node values: Gatherings Prohibited, New Limit on Large Gatherings, Expanded Limit, Lifted Limit)
+* **Median household income** (Node values: Very Low, Low, Medium, High, Very High)
+* **Urban economic index**: An index created by the USDA that captures a county-level "urban vs. rural" metric (Node values: Noncore, Micropolitan, Metropolitan)
 
+<br>The hypothesized DAG is [**pictured in our Causal Modeling notebook.**](https://github.com/chloelarkin/county-covid-cases/blob/main/causal_modeling/Covid19_Causal_Model.ipynb)
+
+### 2. Validate testable implications on the data
+We first test our model's assumptions by evaluating how well the model holds up to the Global Markov Property Assumption and Faithfulness Assumption. Findings indicate that fewer than half of true d-separation statements, are also true conditional statements indicating the DAG does not hold up well with the Global Markov Property Assumption. Additionally, ..<faithfulness> 
+
+### 3. Convert DAG to a generative model in Pyro
+
+### 4. Conduct a posterior predictive check of assumptions
+
+### 5. Enact do-interventions to estimate the causal effects of interest
 
 ## How to explore this project
 
@@ -26,11 +35,11 @@ We invite you to explore the Jupyter notebooks in this directory, which contain 
 We have separated the project files into three folders:
 
 * **datasets** <br>
-Find our raw datasets here.
+Find our raw datasets [**here**](https://github.com/chloelarkin/county-covid-cases/tree/main/datasets).
 * **data_cleaning** <br>
-Code to clean and collate our model's variables of interest.
+Code to clean and collate our model's variables of interest. Folder [**here**](https://github.com/chloelarkin/county-covid-cases/tree/main/data_cleaning)
 * **causal_modeling**<br>
-Our main notebook in which we construct a DAG and run experiments.
+Our main notebook in which we construct a DAG and run experiments. Folder [**here**](https://github.com/chloelarkin/county-covid-cases/tree/main/causal_modeling)
 
 
 ### Prerequisites for reproducing results on your machine
