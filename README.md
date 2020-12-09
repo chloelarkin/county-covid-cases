@@ -5,14 +5,14 @@
 In this project, we investigate causal relationships affecting the outcome of county-level COVID-19 incidence rate, normalized by county population. 
 
 In search of causal relationships affecting the outcome of COVID-19 incidence rate in a county, we explore the following variables:
-* Citizen political leaning
-* State political leaning
-* Emergency preparedness, operationalized as ICU bed availability per capita
-* Proportion of population with a high school education
-* CDC guideline adherence among the county population
-* State bans on large gatherings
-* Median household income
-* Urban economic index: An index created by the USDA that captures a relationship between population density and regional revenue
+* Citizen political leaning (Node values: Heavily Republican, Republican, Leaning Republican, Even, Leaning Democrat, Democrat, Heavily Democrat)
+* State political leaning (Node values: Democrat, Republican)
+* Emergency preparedness, operationalized as ICU bed availability per capita (Node values: Low, Medium, High, Very High availability)
+* Proportion of population with no high school education (Node values: Very Low, Low, Medium, High, Very High)
+* CDC guideline adherence among the county population (Node values: Low, Medium, High)
+* State bans on large gatherings (Node values: Gatherings Prohibited, New Limit on Large Gatherings, Expanded Limit, Lifted Limit)
+* Median household income (Node values: Very Low, Low, Medium, High, Very High)
+* Urban economic index: An index created by the USDA that captures a county-level "urban vs. rural" metric (Node values: Noncore, Micropolitan, Metropolitan)
 
 ## Methods
 We started with the hypothesized DAG pictured in the top of our Causal Modeling notebook.
