@@ -4,25 +4,42 @@
 
 One Paragraph of project description goes here
 
+## Methods
+
 ## How to explore this project
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+We invite you to explore the Jupyter notebooks in this directory, which contain in-line commentary regarding our methods and conclusions. You may run the Jupyter notebooks to reproduce our findings if your device meets the software prerequisites enumerated below. 
+We have separated the project files into three folders:
 
-### Prerequisites
+* **datasets** <br>
+Find our raw datasets here.
+* **data_cleaning** <br>
+Code to clean and collate our model's variables of interest.
+* **causal_modeling**<br>
+Our main notebook in which we construct a DAG and run experiments.
+
+
+### Prerequisites for reproducing results on your machine
 
 The following python packages must be installed to run the Jupyter notebooks in this project:
 
 ```
+collections
+matplotlib
+networkx
 numpy
 pandas
 pgmpy
 pyro
+rpy2.rinterface 
+torch
+xarray
 ```
 
 The following R packages must also be installed to run in-line R code within the Jupyter notebooks in this project:
 ```
 bnlearn
-graphviz
+Rgraphviz
 ```
 
 
