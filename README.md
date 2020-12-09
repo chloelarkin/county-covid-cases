@@ -2,9 +2,9 @@
 
 ## Abstract
 
-In this project, we investigate causal relationships affecting the outcome of county-level COVID-19 case rate, normalized by county population. 
+In this project, we investigate causal relationships affecting the outcome of county-level COVID-19 incidence rate, normalized by county population. 
 
-In search of causal relationships affecting the outcome of COVID-19 case rates in a county, we explore the following variables:
+In search of causal relationships affecting the outcome of COVID-19 incidence rate in a county, we explore the following variables:
 * Citizen political leaning
 * State political leaning
 * Emergency preparedness, operationalized as ICU bed availability per capita
