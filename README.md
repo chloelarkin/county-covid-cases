@@ -17,9 +17,11 @@ In search of causal relationships affecting the outcome of COVID-19 incidence ra
 * **State bans on large gatherings** (Node values: Gatherings Prohibited, New Limit on Large Gatherings, Expanded Limit, Lifted Limit)
 * **Median household income** (Node values: Very Low, Low, Medium, High, Very High)
 * **Urban economic index**: An index created by the USDA that captures a county-level "urban vs. rural" metric (Node values: Noncore, Micropolitan, Metropolitan)
-The hypothesized DAG is pictured in our Causal Modeling notebook.
+
+<br>The hypothesized DAG is [**pictured in our Causal Modeling notebook.**](https://github.com/chloelarkin/county-covid-cases/blob/main/causal_modeling/Covid19_Causal_Model.ipynb)
 
 ### 2. Validate testable implications on the data
+We first test our model's assumptions by evaluating how well the model holds up to the Global Markov Property Assumption and Faithfulness Assumption. Findings indicate that fewer than half of true d-separation statements, are also true conditional statements indicating the DAG does not hold up well with the Global Markov Property Assumption. Additionally, ..<faithfulness> 
 
 ### 3. Convert DAG to a generative model in Pyro
 
