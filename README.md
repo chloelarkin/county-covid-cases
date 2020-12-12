@@ -21,13 +21,19 @@ In search of causal relationships affecting the outcome of COVID-19 incidence ra
 <br>The hypothesized DAG is [**pictured in our Causal Modeling notebook.**](https://github.com/chloelarkin/county-covid-cases/blob/main/causal_modeling/Covid19_Causal_Model.ipynb)
 
 ### 2. Validate testable implications on the data
-We first test our model's assumptions by evaluating how well the model holds up to the Global Markov Property Assumption and Faithfulness Assumption. Findings indicate that fewer than half of true d-separation statements, are also true conditional statements indicating the DAG does not hold up well with the Global Markov Property Assumption. Additionally, ..<faithfulness> 
+We first test our model's assumptions by evaluating how well the model holds up to the Global Markov Property Assumption and Faithfulness Assumption. Findings indicate that fewer than half of true d-separation statements, are also true conditional statements indicating the DAG does not hold up well with the Global Markov Property Assumption. Conversely, the DAG also performed poorly by the Faithfulness Assumption's criterion that "every true conditional independence statement about the joint distribution corresponds to a true d-separation statement in the DAG." Fewer than 50% of true conditional independence statements did so.  
+
+Notably, we iterated through eight possible DAGs that we felt made intuitive sense given our variables; you may find a ".rmd" R Markdown notebook iterating through the Markov and Faithfulness analyses of each DAG in our data_cleaning folder. The model we ultimately selected was the DAG that performed the best on these two metrics.
 
 ### 3. Convert DAG to a generative model in Pyro
+Our next step was to convert the DAG into a Pyro generative model; initially, this posed a logistical challenge because our DAG entailed calculating a very large number of conditional probabilities. To bypass the difficulty of computing each probability by hand, we used the "pgmpy" Python package's "BayesianModel" module, which converts directed graph data into Bayesian networks with conditional probability values. We then inputted these probability values into our Pyro DAG. You can see these steps in our [**causal modeling**](https://github.com/chloelarkin/county-covid-cases/blob/main/causal_modeling/Covid19_Causal_Model.ipynb) notebook.
+
 
 ### 4. Conduct a posterior predictive check of assumptions
+To check our assumptions on the data, we conducted posterior predictive checks comparing posterior conditional probabilities from the data vs. sample conditional probabilities generated from each edge of the DAG. Our [**causal modeling**](https://github.com/chloelarkin/county-covid-cases/blob/main/causal_modeling/Covid19_Causal_Model.ipynb) notebook contains graphical representations of the accordance vs. discordance of the posterior and generative probabilities for each edge in the DAG. In sum, although some node relationships indicated that the generated probabilities corresponded closely with the posterior probabilities of the dataset, the generated probabilities are not fully representative of the data and have definite room for improvement.
 
 ### 5. Enact do-interventions to estimate the causal effects of interest
+Our next experiment was to enact do-interventions on the data, where an individual node is selected to be set as a particular value -- this node becomes statistically independent of its prior "causes." We provide detailed analyses of each intervention in our [**causal modeling**](https://github.com/chloelarkin/county-covid-cases/blob/main/causal_modeling/Covid19_Causal_Model.ipynb) notebook.
 
 ## How to explore this project
 
