@@ -2,7 +2,9 @@
 
 ## Abstract
 
-In this project, we investigate causal relationships affecting the outcome of **county-level COVID-19 incidence rate**, normalized by county population. 
+The COVID-19 novel coronavirus pandemic has devastated the United States, killing nearly 300,000 Americans as of December 2020. Public health officials seeking to curtail the virus's spread have encountered complicating factors including political dissent with preventative measures, inequities in healthcare infrastructure across regions of the country, and inconsistencies in governmental restrictions on high-risk activities. 
+
+In this project, we investigate causal relationships affecting the outcome of **county-level COVID-19 incidence rate**, normalized by county population. We build a DAG with variables including ICU bed availability, regional political leanings, and demographic variables which we hypothesize may all influence COVID-19 case rate outcomes. After conducting conditional modeling, posterior predictive checks, and do-interventions on the data, we conclude the impact of these variables on regional COVID-19 outcomes is intersectional. Do-interventions suggest that interventions on public health measures, including intervening on citizens' CDC compliance or bans on large gatherings, more strongly differentiate outcomes when paired with an intervention on infrastructure, where ICU bed availability is set to "High." Future work 
 
 
 ## Deliverables
