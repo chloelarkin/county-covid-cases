@@ -1,4 +1,4 @@
-# Projecting COVID-19 Incidence Rates among Counties in the United States
+# Causal Modeling of COVID-19 Case Rates among Counties in the United States
 
 ## Abstract
 
