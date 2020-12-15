@@ -122,7 +122,7 @@ graphviz.plot(algo_pdag)
 
 
 *Plans to modify the algorithmically generated PDAG with expert knowledge*:
-1. In the PDAG, there is are undirected edge between all three variables in the CC (county COVID-19 cases) node's Markov blanket: SPL (state political leaning),
+1. In the PDAG, there are undirected edges between all three variables in the CC (county COVID-19 cases) node's Markov blanket: SPL (state political leaning),
 BLG (bans on large gatherings), and HS (proportion of population with a high school diploma). Although these edges are undirected in the equivalence class
 of the algorithmically generated DAG, human domain knowledge provides the intuition that the edge between SPL and HS should be directed as: HS --> SPL.
 Our justification for this claim is that the voting age is 18, and few individuals earn high school diplomas after reaching voting age. State political leaders
@@ -187,7 +187,7 @@ graphviz.compare(domain_knowledge_dag, hybrid_dag)
 ```
 
 *Summary of "graphviz.compare" structural comparison of domain-knowledge DAG and hybrid-knowledge DAG:*
-In this visual comparison of the domain-knowledge DAG and hybrid-knowledge DAG, there is a code for the meaning of each edge type:
+In this visual comparison of the domain-knowledge DAG and hybrid-knowledge DAG, there is a legend for the meaning of each edge type:
 
 1. Red solid lines denote edges that are only present in the hybrid-knowledge DAG
 2. Blue dotted lines denote edges that are only present in the domain-knowledge DAG
@@ -196,7 +196,7 @@ In this visual comparison of the domain-knowledge DAG and hybrid-knowledge DAG, 
 The two DAGs share fewer than half of their edges. This suggests that the dataset may not fit well with all of our expert domain intuitions about likely
 causal relationships between variables. One of the most striking findings is that the Markov blankets for CC are quite different: the domain-knowledge DAG CC
 Markov blanket is [ICU, CDC, BLG] whereas the hybrid-knowledge DAG CC Markov blanket is [HS, SPL, BLG]. There is a consistent direct
-causal relationship from bans on large gatherings to county case rate between the two DAGs.
+causal relationship from bans on large gatherings to county case rate in both DAGs.
  
 *Compare global Markov property values of both DAGs: Test whether there is conditional independence in the data for each true d-separation of each DAG.*
 
