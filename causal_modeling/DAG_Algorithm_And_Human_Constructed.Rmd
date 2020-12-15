@@ -1,0 +1,87 @@
+---
+title: "DAG Built with Algorithm and Human Influence"
+author: "Chloe Larkin"
+date: "12/14/2020"
+output: html_document
+---
+
+# Load bnlearn and graph visualization libraries
+```{r}
+library(bnlearn);
+library(Rgraphviz);
+```
+
+# Read in the COVID data
+```{r}
+data = read.delim("../datasets/dag_data_V3.csv", sep = ",");
+```
+
+# Use a bnlearn constraint-based structure learning algorithm to generate a DAG algorithmically
+```{r}
+algo_generated_dag = pc.stable(
+  data,
+  blacklist = matrix(
+    c(
+      # County characteristic variables can have directed edges toward CDC compliance, but not vice versa.
+      "CDC", "MI", 
+      "CDC", "CPL", 
+      "CDC", "HS", 
+      "CDC", "SPL", 
+      "CDC", "UI", 
+      
+      # Bans on large gatherings should not have a directed edge to any county characteristic.
+      "BLG", "ICU",
+      "BLG", "CPL",
+      "BLG", "HS",
+      "BLG", "MI",
+      "BLG", "UI",
+      "BLG", "SPL",
+      
+      # ICU bed availability should not have a directed edge to the other county characteristic variables.
+      "ICU", "HS",
+      "ICU", "CPL",
+      "ICU", "SPL",
+      "ICU", "UI",
+      "ICU", "MI",
+      "ICU", "CDC", # ICU bed availability should not have a directed edge to CDC compliance
+      
+      # Percentage of residents with a high school diploma could have directed edges to political leanings, 
+      # but not vice versa.
+      "CPL", "HS",
+      "SPL", "HS",
+      
+      # Each node could have a directed edge to county cases, but not vice versa.
+       "CC","CPL",
+       "CC","HS", 
+       "CC","MI",
+       "CC","UI", 
+       "CC","CDC", 
+       "CC","SPL", 
+       "CC","BLG",
+       "CC","ICU"
+    ),
+    ncol = 2,
+    byrow = TRUE
+  ),
+  undirected = FALSE,
+  debug = TRUE
+)
+```
+
+# Plot the algorithm-generated DAG.
+```{r}
+plot(algo_generated_dag)
+```
+
+# Create a PDAG from the algorithm-generated DAG, using bnlearn's "cpdag" tool.
+```{r}
+algo_pdag <- cpdag(algo_generated_dag, debug=TRUE)
+```
+
+# Plot the PDAG of the algorithm-generated DAG.
+```{r}
+graphviz.plot(algo_pdag)
+```
+
+Interpretation of PDAG:
+
