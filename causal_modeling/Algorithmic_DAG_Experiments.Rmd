@@ -90,7 +90,7 @@ algo_generated_dag = iamb(
 ```
 Description of algorithm:
 Using conditional independence testing, this algorithm computed probable Markov blankets for each node in the DAG, checked for possible v-structures
-among nodes, then set the directions of all directed arcs. The algorithm then set futher arc directions mandated by our specified whitelist and blacklist node relationships, and finally marked final v-structures and set final arc directions before stopping.
+among nodes, then set the directions of all directed arcs. The algorithm then sets futher arc directions mandated by our specified whitelist and blacklist node relationships, and finally marks final v-structures and set final arc directions before stopping.
 
 
 # Plot the algorithmically generated DAG.
@@ -125,8 +125,7 @@ graphviz.plot(algo_pdag)
 1. In the PDAG, there are undirected edges between all three variables in the CC (county COVID-19 cases) node's Markov blanket: SPL (state political leaning),
 BLG (bans on large gatherings), and HS (proportion of population with a high school diploma). Although these edges are undirected in the equivalence class
 of the algorithmically generated DAG, human domain knowledge provides the intuition that the edge between SPL and HS should be directed as: HS --> SPL.
-Our justification for this claim is that the voting age is 18, and few individuals earn high school diplomas after reaching voting age. State political leaders
-are determined by voters.
+Our justification for this claim is that a state's political leadership is determined by voters, and one's education may influence who they vote for.
 
 2. We edit the undirected edge between SPL and BLG such that it is directed as: SPL --> BLG. 
 Intuitively, whether a state puts bans on large gatherings should not influence the state's existing political leadership.
@@ -142,7 +141,7 @@ based on the intuition that whether an area is rural or urban will affect how we
 5. We edit the undirected edge between UI (urban influence index) and MI (median income) such that it is directed as: UI --> MI,
 based on the intuition that the urban vs. rural location of a county may influence its citizens' income and financial status.
 
-*Our final hybrid DAG (signals from both algorithmically generated DAG and human domain knowledge*:
+*Our final hybrid DAG (signals from both algorithmically generated DAG and human domain knowledge)*:
 ```{r}
 # Create list of nodes to be in the DAG
 nodes <- c("CC", "BLG", "SPL", "HS", "MI", "UI", "ICU", "CDC", "CPL")
