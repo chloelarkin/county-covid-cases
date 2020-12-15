@@ -64,7 +64,7 @@ algo_generated_dag = iamb(
     byrow = TRUE
   ),
   undirected = FALSE,
-  debug = FALSE
+  debug = TRUE
 )
 ```
 
@@ -72,13 +72,38 @@ algo_generated_dag = iamb(
 ```{r}
 plot(algo_generated_dag)
 ```
-
-# Create a PDAG from the algorithm-generated DAG, using bnlearn's "cpdag" tool.
 ```{r}
-algo_pdag <- cpdag(algo_generated_dag, debug=TRUE)
+mb(algo_generated_dag, "CC")
 ```
 
-# Plot the PDAG of the algorithm-generated DAG.
+*Insights drawn from the algorithmically-generated DAG:*
+Contrary to our expectations, there is not a directed edge from CDC compliance to our outcome variable CC in the algorithmically generated DAG. 
+The CDC compliance variable has no outgoing edges. 
+The Markov blanket of county Covid case rate in the algorithmically generated DAG is ["HS", "SPL", "BLG"] -- high school education, 
+the county's state's political leaning, and whether the county's state has enacted bans on large gatherings. 
+
+*Construct a PDAG from the algorithmically generated DAG:*
+With the knowledge that we can only learn a causal structure up to an equivalence class, we generalize the algorithmically generated DAG into its
+PDAG form:
+
+# Create a PDAG from the algorithmically generated DAG, using bnlearn's "cpdag" tool.
+```{r}
+algo_pdag <- cpdag(algo_generated_dag, debug=FALSE)
+```
+
+# Plot the PDAG of the algorithmically generated DAG.
 ```{r}
 graphviz.plot(algo_pdag)
 ```
+
+
+*Plans to modify the algorithmically generated PDAG with expert knowledge*:
+In the PDAG, there is are undirected edge between all three variables in the CC (county Covid cases) node's Markov blanket: SPL (state political leaning),
+BLG (bans on large gatherings), and HS (proportion of population with a high school diploma). Although these edges are undirected in the equivalence class
+of the algorithmically generated DAG, human domain knowledge provides the intuition that the edge between SPL and HS should be directed as: HS --> SPL.
+We justify this because the voting age is 18, and few individuals earn high school diplomas after reaching voting age.
+
+Further, we choose to modify the undirected edge between SPL and BLG such that it is directed as: SPL --> BLG. 
+Intuitively, whether a state puts bans on large gatherings should not influence the state's existing political leadership.
+On the other hand, we hypothesize state leaders' political allegiances to influential figures who are pro- or anti- Covid regulation may influence
+whether the state enacts bans on large gatherings.
