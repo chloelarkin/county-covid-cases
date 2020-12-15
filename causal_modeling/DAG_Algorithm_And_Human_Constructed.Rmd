@@ -1,9 +1,17 @@
 ---
-title: "DAG Built with Algorithm and Human Influence"
+title: "Construct a DAG synthesizing algorithmic analysis of the dataset with expert domain knowledge"
 author: "Chloe Larkin"
 date: "12/14/2020"
 output: html_document
 ---
+
+# Statement of Purpose
+The purpose of this notebook is to algorithmically generate a DAG from the dataset in order to analytically learn the most suitable structure for a DAG given
+the conditional independencies of the dataset.
+After using a constraint-based learning algorithm to generate a DAG in bnlearn, we edit this DAG to incorporate human domain knowledge about the 
+expected interactions between variables.
+Finally, we compare the global Markov property of our prior constructed DAG (based solely upon human domain opinion) versus this new
+DAG constructed from a hybrid of human and algorithmic signals.
 
 # Load bnlearn and graph visualization libraries
 ```{r}
@@ -11,12 +19,21 @@ library(bnlearn);
 library(Rgraphviz);
 ```
 
-# Read in the COVID data
+# Read in the county COVID-19 case rate dataset
 ```{r}
 data = read.delim("../datasets/dag_data_V3.csv", sep = ",");
 ```
 
-# Use a bnlearn constraint-based structure learning algorithm to generate a DAG algorithmically
+# Use a bnlearn constraint-based learning algorithm to generate a DAG algorithmically
+The Incremental Association ("IAMB") constraint-based learning algorithm is an algorithm provided in the bnlearn package.
+Here is bnlearn's description of the algorithm:
+"[IAMB is] based on the Markov blanket detection algorithm of the same name, which is based on a two-phase selection scheme (a forward selection followed by an attempt to remove false positives)." source: https://www.bnlearn.com/documentation/man/structure.learning.html
+
+Parameters for constructing iamb() algorithmically generated DAG:
+data -- the dataset
+blacklist -- a matrix containing a list of edges that should not be included in the graph. The first node in a pair has a directed edge to the second node. 
+undirected -- whether the produced DAG should be an undirected DAG. 
+debug -- whether to print a full log of the algorithm's Markov blankets for each node and conditional independence probability computations.
 ```{r}
 algo_generated_dag = iamb(
   data,
@@ -79,7 +96,7 @@ mb(algo_generated_dag, "CC")
 *Insights drawn from the algorithmically-generated DAG:*
 Contrary to our expectations, there is not a directed edge from CDC compliance to our outcome variable CC in the algorithmically generated DAG. 
 The CDC compliance variable has no outgoing edges. 
-The Markov blanket of county Covid case rate in the algorithmically generated DAG is ["HS", "SPL", "BLG"] -- high school education, 
+The Markov blanket of county COVID-19 case rate in the algorithmically generated DAG is ["HS", "SPL", "BLG"] -- high school education, 
 the county's state's political leaning, and whether the county's state has enacted bans on large gatherings. 
 
 *Construct a PDAG from the algorithmically generated DAG:*
@@ -98,12 +115,20 @@ graphviz.plot(algo_pdag)
 
 
 *Plans to modify the algorithmically generated PDAG with expert knowledge*:
-In the PDAG, there is are undirected edge between all three variables in the CC (county Covid cases) node's Markov blanket: SPL (state political leaning),
+In the PDAG, there is are undirected edge between all three variables in the CC (county COVID-19 cases) node's Markov blanket: SPL (state political leaning),
 BLG (bans on large gatherings), and HS (proportion of population with a high school diploma). Although these edges are undirected in the equivalence class
 of the algorithmically generated DAG, human domain knowledge provides the intuition that the edge between SPL and HS should be directed as: HS --> SPL.
 We justify this because the voting age is 18, and few individuals earn high school diplomas after reaching voting age.
 
 Further, we choose to modify the undirected edge between SPL and BLG such that it is directed as: SPL --> BLG. 
 Intuitively, whether a state puts bans on large gatherings should not influence the state's existing political leadership.
-On the other hand, we hypothesize state leaders' political allegiances to influential figures who are pro- or anti- Covid regulation may influence
-whether the state enacts bans on large gatherings.
+On the other hand, we hypothesize state leaders' political allegiances to influential figures who are pro- or anti- Covid preventative measures may influence
+whether a county's state enacts bans on large gatherings.
+
+
+*Our final hybrid DAG (signals from both algorithmically generated DAG and human domain knowledge*:
+
+
+*Analyze the global Markov property on this newly generated DAG, comparing it with the Markov property of our prior DAG generated solely from human-domain insight:*
+
+
