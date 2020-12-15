@@ -18,7 +18,7 @@ data = read.delim("../datasets/dag_data_V3.csv", sep = ",");
 
 # Use a bnlearn constraint-based structure learning algorithm to generate a DAG algorithmically
 ```{r}
-algo_generated_dag = pc.stable(
+algo_generated_dag = iamb(
   data,
   blacklist = matrix(
     c(
@@ -64,11 +64,11 @@ algo_generated_dag = pc.stable(
     byrow = TRUE
   ),
   undirected = FALSE,
-  debug = TRUE
+  debug = FALSE
 )
 ```
 
-# Plot the algorithm-generated DAG.
+# Plot the algorithmically generated DAG.
 ```{r}
 plot(algo_generated_dag)
 ```
@@ -82,6 +82,3 @@ algo_pdag <- cpdag(algo_generated_dag, debug=TRUE)
 ```{r}
 graphviz.plot(algo_pdag)
 ```
-
-Interpretation of PDAG:
-
