@@ -6,12 +6,13 @@ output: html_document
 ---
 
 # Statement of Purpose
-The purpose of this notebook is to algorithmically generate a DAG from the dataset in order to analytically learn the most suitable structure for a DAG given
-the conditional independencies of the dataset. 
-- We use a constraint-based learning algorithm to generate a DAG on bnlearn. 
-- We modify this generated DAG to reflect our domain knowledge about the assumed interactions between variables. 
-- We visualize a structural comparison of the original and new DAGS. 
-- Finally, we compare the global Markov property of our prior constructed DAG (based solely upon domain knowledge and intuition) versus this new DAG, constructed from a hybrid of human and algorithmic signals.
+In this notebook, we algorithmically generate a DAG from our COVID-19 dataset in order to analytically learn a suitable structure for a DAG given
+the conditional independencies of the dataset. We review the DAG and tweak its relationships among nodes to reflect domain knowledge. We then compare the structures and analyze the global Markov property of this modified, hybrid DAG (generated from both algorithmic insights and domain knowledge) vs. our original domain knowledge DAG.
+
+1. We use a constraint-based learning algorithm to generate a DAG on bnlearn. 
+2. We modify this generated DAG to reflect domain knowledge about the assumed relationships between variables. 
+3. We visualize a structural comparison of our prior constructed DAG (based solely upon domain knowledge and intuition) versus this new DAG, constructed from a hybrid of human and algorithmic signals. 
+4. Finally, we compare the global Markov property of the two DAGs.
 
 # Load bnlearn and graph visualization libraries
 ```{r}
